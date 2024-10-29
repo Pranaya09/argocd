@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: html-pod
-        image: vizzwastaken/proj1:40f06035cdc4376007ea2319e29f972839770cdd
+        image: httpd
         ports:
         - containerPort: 3000
         volumeMounts:

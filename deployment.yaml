@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: web-app
+  name: argo-deployment
+  labels:
+    app: argo-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: argo
+  template:
+    metadata:
+      labels:
+        app: argo
+    spec:
+      containers:
+      - name: html-pod
+        image: vizzwastaken/proj1:40f06035cdc4376007ea2319e29f972839770cdd
+        ports:
+        - containerPort: 3000
+        volumeMounts:
+          - mountPath: /etc/todos/todo.db
+            name: web-app-store
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "2m"
+          limits:
+            memory: "128Mi"
+            cpu: "5m"
+      volumes:
+        - name: web-app-store
+          persistentVolumeClaim:
+            claimName: web-pvc

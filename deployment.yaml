@@ -20,9 +20,6 @@ spec:
         image: httpd
         ports:
         - containerPort: 3000
-        volumeMounts:
-          - mountPath: /etc/todos/todo.db
-            name: web-app-store
         resources:
           requests:
             memory: "64Mi"
@@ -30,7 +27,4 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "5m"
-      volumes:
-        - name: web-app-store
-          persistentVolumeClaim:
-            claimName: web-pvc
+
